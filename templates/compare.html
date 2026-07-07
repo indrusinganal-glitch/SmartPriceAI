@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Compare Prices</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<nav class="navbar">
+    <h2>SmartPrice AI</h2>
+    <a href="/dashboard/">Dashboard</a>
+</nav>
+
+<div class="product-details">
+    <h1>Compare Prices for {{ product.name }}</h1>
+
+    <div class="compare-container">
+
+    <div class="compare-card amazon">
+        <h2>Amazon</h2>
+        <h3>₹{{ product.price }}</h3>
+        <button>Buy Now</button>
+    </div>
+
+    <div class="compare-card flipkart">
+        <h2>Flipkart</h2>
+        <h3>₹{{ product.price|add:"-500" }}</h3>
+        <button>Buy Now</button>
+    </div>
+
+    <div class="compare-card croma">
+        <h2>Croma</h2>
+        <h3>₹{{ product.price|add:"300" }}</h3>
+        <button>Buy Now</button>
+    </div>
+
+    <div class="compare-card reliance">
+        <h2>Reliance Digital</h2>
+        <h3>₹{{ product.price|add:"100" }}</h3>
+        <button>Buy Now</button>
+    </div>
+
+</div>
+</div>
+
+</body>
+</html>

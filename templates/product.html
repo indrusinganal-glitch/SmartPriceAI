@@ -1,0 +1,88 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ product.name }}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<nav class="navbar">
+    <h2>SmartPrice AI</h2>
+
+    <div>
+        <a href="/dashboard/">Dashboard</a>
+        <a href="/wishlist/">Wishlist</a>
+        <a href="/profile/">Profile</a>
+        <a href="/logout/">Logout</a>
+    </div>
+</nav>
+
+<div class="product-details">
+
+    <img src="{{ product.image.url }}" width="350">
+
+    <h1>{{ product.name }}</h1>
+
+    <h3>{{ product.brand }}</h3>
+
+    <h2>₹{{ product.price }}</h2>
+
+    <h3>Average Rating: ⭐ {{ avg_rating }}/5</h3>
+
+    <p>{{ product.description }}</p>
+
+    <br>
+
+    <a href="/products/{{ product.id }}/compare/">
+        <button>Compare Prices</button>
+        <a href="/products/{{ product.id }}/history/">
+    <button>Price History</button>
+</a>
+    </a>
+
+    <a href="/wishlist/add/{{ product.id }}/">
+        <button>Add to Wishlist</button>
+    </a>
+
+    <br><br>
+
+    <a href="/dashboard/">
+        <button>← Back to Dashboard</button>
+    </a>
+    <a href="/alerts/create/{{ product.id }}/">
+    <button>Set Price Alert</button>
+</a>
+    <a href="/products/{{ product.id }}/recommendations/">
+    <button>AI Recommendations</button>
+    <hr>
+
+<h2>Reviews</h2>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <input type="number" name="rating" placeholder="Rating 1 to 5" min="1" max="5" required>
+
+    <textarea name="comment" placeholder="Write your review" required></textarea>
+
+    <button type="submit">Submit Review</button>
+</form>
+
+{% for review in reviews %}
+    <div class="card">
+        <h3>⭐ {{ review.rating }}/5</h3>
+        <p>{{ review.comment }}</p>
+        <small>By {{ review.user.username }}</small>
+    </div>
+{% empty %}
+    <p>No reviews yet.</p>
+{% endfor %}
+</a>
+</div>
+<footer class="footer">
+    <p>© 2026 SmartPrice AI | Built with Django</p>
+    <p>Developed by Indru Singanal</p>
+</footer>
+</body>
+</html>

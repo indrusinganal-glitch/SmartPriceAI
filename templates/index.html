@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SmartPrice AI</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<nav class="navbar">
+    <h2>SmartPrice AI</h2>
+
+    <div>
+        <a href="#">Home</a>
+        <a href="#">Compare</a>
+        <a href="#">Wishlist</a>
+        <a href="#">Login</a>
+    </div>
+</nav>
+
+<section class="hero">
+
+    <h1>Find the Best Price Across Every Store</h1>
+
+    <p>
+        Compare prices from Amazon, Flipkart, Croma and Reliance Digital.
+        Save products, track price history, set alerts and get AI recommendations.
+    </p>
+
+    <div class="hero-buttons">
+        <a href="/register/">
+            <button>Get Started</button>
+        </a>
+
+        <a href="/login/">
+            <button>Login</button>
+        </a>
+    </div>
+
+</section>
+    <div class="search-box">
+        <input type="text" placeholder="Search iPhone, laptop, headphones...">
+        <button>Search</button>
+    </div>
+</section>
+
+<section class="products">
+    <h2>Trending Products</h2>
+
+    <div class="product-grid">
+        <div class="card">
+            <h3>iPhone 16</h3>
+            <p>Starting from ₹73,499</p>
+            <button>Compare</button>
+        </div>
+
+        <div class="card">
+            <h3>Samsung S25</h3>
+            <p>Starting from ₹69,999</p>
+            <button>Compare</button>
+        </div>
+
+        <div class="card">
+            <h3>Boat Headphones</h3>
+            <p>Starting from ₹1,499</p>
+            <button>Compare</button>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>
+<a href="/login/">Login</a>
+<a href="/register/">Register</a>

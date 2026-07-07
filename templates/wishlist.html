@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Wishlist</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<nav class="navbar">
+    <h2>SmartPrice AI</h2>
+    <div>
+        <a href="/dashboard/">Dashboard</a>
+        <a href="/wishlist/">Wishlist</a>
+        <a href="/profile/">Profile</a>
+        <a href="/logout/">Logout</a>
+    </div>
+</nav>
+
+<section class="products">
+    <h2>My Wishlist</h2>
+
+    <div class="product-grid">
+
+        {% for item in items %}
+
+        <div class="card">
+            <img src="{{ item.product.image.url }}" width="200">
+
+            <h3>{{ item.product.name }}</h3>
+
+            <p>{{ item.product.brand }}</p>
+
+            <p>₹{{ item.product.price }}</p>
+
+            <a href="/products/{{ item.product.id }}/">
+                <button>View Details</button>
+            </a>
+
+            <br><br>
+
+            <a href="/wishlist/remove/{{ item.id }}/">
+                <button style="background:red;">Remove</button>
+            </a>
+        </div>
+
+        {% empty %}
+
+        <p>No wishlist items yet.</p>
+
+        {% endfor %}
+
+    </div>
+</section>
+<footer class="footer">
+    <p>© 2026 SmartPrice AI | Built with Django</p>
+    <p>Developed by Indru Singanal</p>
+</footer>
+</body>
+</html>

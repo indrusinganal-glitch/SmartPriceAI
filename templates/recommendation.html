@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Recommendations</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<nav class="navbar">
+    <h2>SmartPrice AI</h2>
+    <div>
+        <a href="/dashboard/">Dashboard</a>
+        <a href="/wishlist/">Wishlist</a>
+        <a href="/profile/">Profile</a>
+        <a href="/logout/">Logout</a>
+    </div>
+</nav>
+
+<section class="products">
+    <h2>AI Recommendations for {{ product.name }}</h2>
+
+    <div class="product-grid">
+        {% for item in recommended_products %}
+        <div class="card">
+            <img src="{{ item.image.url }}" width="200">
+            <h3>{{ item.name }}</h3>
+            <p>{{ item.brand }}</p>
+            <p>₹{{ item.price }}</p>
+
+            <a href="/products/{{ item.id }}/">
+                <button>View Details</button>
+            </a>
+        </div>
+        {% empty %}
+        <p>No recommendations available yet. Add more products in the same category.</p>
+        {% endfor %}
+    </div>
+</section>
+
+</body>
+</html>

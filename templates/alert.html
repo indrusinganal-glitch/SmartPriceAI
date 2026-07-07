@@ -1,0 +1,34 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Set Price Alert</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<nav class="navbar">
+    <h2>SmartPrice AI</h2>
+    <div>
+        <a href="/dashboard/">Dashboard</a>
+        <a href="/wishlist/">Wishlist</a>
+        <a href="/profile/">Profile</a>
+        <a href="/logout/">Logout</a>
+    </div>
+</nav>
+
+<div class="login-container">
+    <h1>Set Price Alert</h1>
+
+    <h2>{{ product.name }}</h2>
+    <p>Current Price: ₹{{ product.price }}</p>
+
+    <form method="POST">
+        {% csrf_token %}
+        <input type="number" name="target_price" placeholder="Enter target price" required>
+        <button type="submit">Set Alert</button>
+    </form>
+</div>
+
+</body>
+</html>

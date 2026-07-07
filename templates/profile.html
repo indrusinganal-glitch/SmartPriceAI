@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Profile</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<nav class="navbar">
+    <h2>SmartPrice AI</h2>
+
+    <div>
+        <a href="/dashboard/">Dashboard</a>
+        <a href="/wishlist/">Wishlist</a>
+        <a href="/logout/">Logout</a>
+    </div>
+</nav>
+
+<div class="login-container">
+
+    <h1>My Profile</h1>
+
+    <img src="https://via.placeholder.com/150" width="150" style="border-radius:50%;">
+
+    <h2>{{ request.user.username }}</h2>
+
+    <p><strong>Email:</strong> {{ request.user.email }}</p>
+
+    <p><strong>Joined:</strong> {{ request.user.date_joined }}</p>
+
+</div>
+
+</body>
+</html>

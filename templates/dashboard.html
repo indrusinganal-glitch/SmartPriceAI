@@ -1,0 +1,95 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard - SmartPrice AI</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<nav class="navbar">
+    <h2>SmartPrice AI</h2>
+    <button onclick="toggleDarkMode()">🌙 Dark</button>
+    <div>
+        <a href="/">Home</a>
+        <a href="/dashboard/">Dashboard</a>
+        <a href="/wishlist/">Wishlist</a>
+        <a href="/profile/">Profile</a>
+        <a href="/logout/">Logout</a>
+    </div>
+</nav>
+
+<section class="hero">
+    <h1>User Dashboard</h1>
+    <p>Search products and compare prices instantly.</p>
+    <div class="category-filter">
+
+    <a href="/dashboard/?category=All">All</a>
+
+    <a href="/dashboard/?category=Mobile">Mobiles</a>
+
+    <a href="/dashboard/?category=Laptop">Laptops</a>
+
+    <a href="/dashboard/?category=Watch">Watches</a>
+
+    <a href="/dashboard/?category=Headphone">Headphones</a>
+
+    <a href="/dashboard/?category=TV">TV</a>
+
+</div>
+<section class="stats">
+
+    <div class="stat-card">
+        <h2>{{ total_products }}</h2>
+        <p>Products</p>
+    </div>
+
+    <div class="stat-card">
+        <h2>{{ total_users }}</h2>
+        <p>Users</p>
+    </div>
+
+    <div class="stat-card">
+        <h2>{{ total_wishlist }}</h2>
+        <p>Wishlist Items</p>
+    </div>
+
+    <div class="stat-card">
+        <h2>{{ total_alerts }}</h2>
+        <p>Price Alerts</p>
+    </div>
+
+</section>
+    <form method="GET" action="/dashboard/" class="search-box">
+        <input type="text" name="q" placeholder="Search product..." value="{{ query|default:'' }}">
+        <button type="submit">Search</button>
+    </form>
+</section>
+
+<section class="products">
+    <h2>Available Products</h2>
+
+    <div class="product-grid">
+        {% for product in products %}
+        <div class="card">
+            <img src="{{ product.image.url }}" width="200">
+            <h3>{{ product.name }}</h3>
+            <p>{{ product.brand }}</p>
+            <p>₹{{ product.price }}</p>
+
+            <a href="/products/{{ product.id }}/">
+                <button>View Details</button>
+            </a>
+        </div>
+        {% empty %}
+        <p>No products added yet.</p>
+        {% endfor %}
+    </div>
+</section>
+<script src="{% static 'js/script.js' %}"></script>
+<footer class="footer">
+    <p>© 2026 SmartPrice AI | Built with Django</p>
+    <p>Developed by Indru Singanal</p>
+</footer>
+</body>
+</html>
