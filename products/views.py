@@ -53,11 +53,44 @@ def price_history(request, id):
 def recommendations(request, id):
     product = get_object_or_404(Product, id=id)
 
-    recommended_products = Product.objects.filter(
-        category=product.category
-    ).exclude(id=product.id)[:4]
+    all_products = Product.objects.exclude(id=product.id)
+
+    recommended_list = []
+
+    for item in all_products:
+        score = 0
+        reason = []
+
+        if item.category == product.category:
+            score += 40
+            reason.append("Same category")
+
+        price_difference = abs(item.price - product.price)
+
+        if price_difference <= 10000:
+            score += 30
+            reason.append("Similar price range")
+        elif price_difference <= 25000:
+            score += 15
+            reason.append("Nearby budget")
+
+        if item.brand != product.brand:
+            score += 10
+            reason.append("Alternative brand")
+
+        recommended_list.append({
+            "product": item,
+            "score": score,
+            "reason": ", ".join(reason)
+        })
+
+    recommended_list = sorted(
+        recommended_list,
+        key=lambda x: x["score"],
+        reverse=True
+    )[:4]
 
     return render(request, "recommendations.html", {
         "product": product,
-        "recommended_products": recommended_products
+        "recommended_list": recommended_list
     })
