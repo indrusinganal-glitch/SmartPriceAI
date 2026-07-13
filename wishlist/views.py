@@ -19,8 +19,8 @@ def register_view(request):
             return render(request, "accounts/register.html")
 
         if User.objects.filter(username=username).exists():
-    messages.error(request, "Username already exists.")
-    return render(request, "accounts/register.html")
+            messages.error(request, "Username already exists.")
+            return render(request, "accounts/register.html")
 
         if email and User.objects.filter(email__iexact=email).exists():
             messages.error(request, "An account with this email already exists.")
