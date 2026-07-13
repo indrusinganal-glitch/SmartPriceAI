@@ -463,3 +463,21 @@ button:hover{
     color: #333;
     margin-top: 8px;
 }
+.stat-card {
+    background: white;
+    color: #111;
+    padding: 25px;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.stat-card h2 {
+    color: #2563eb;
+    margin: 0;
+    font-size: 32px;
+}
+
+.stat-card p {
+    color: #333;
+    margin-top: 8px;
+}
