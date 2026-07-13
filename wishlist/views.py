@@ -1,25 +1,38 @@
-from django.shortcuts import redirect, render
-from django.contrib.auth.decorators import login_required
-from .models import Wishlist
-from products.models import Product
+from django.contrib import messages
+from django.contrib.auth.models import User
+from django.shortcuts import render, redirect
 
-@login_required(login_url="/login/")
-def add_to_wishlist(request, id):
-    product = Product.objects.get(id=id)
 
-    Wishlist.objects.get_or_create(
-        user=request.user,
-        product=product
-    )
+def register_view(request):
+    if request.method == "POST":
+        username = request.POST.get("username", "").strip()
+        email = request.POST.get("email", "").strip()
+        password = request.POST.get("password", "")
+        confirm_password = request.POST.get("confirm_password", "")
 
-    return redirect("/wishlist/")
+        if not username or not password:
+            messages.error(request, "Username and password are required.")
+            return render(request, "accounts/register.html")
 
-@login_required(login_url="/login/")
-def wishlist_page(request):
-    items = Wishlist.objects.filter(user=request.user)
-    return render(request, "wishlist.html", {"items": items})
-@login_required(login_url="/login/")
-def remove_from_wishlist(request, id):
-    item = Wishlist.objects.get(id=id, user=request.user)
-    item.delete()
-    return redirect("/wishlist/")
+        if password != confirm_password:
+            messages.error(request, "Passwords do not match.")
+            return render(request, "accounts/register.html")
+
+        if User.objects.filter(username__iexact=username).exists():
+            messages.error(request, "This username is already taken. Choose another username.")
+            return render(request, "accounts/register.html")
+
+        if email and User.objects.filter(email__iexact=email).exists():
+            messages.error(request, "An account with this email already exists.")
+            return render(request, "accounts/register.html")
+
+        User.objects.create_user(
+            username=username,
+            email=email,
+            password=password
+        )
+
+        messages.success(request, "Account created successfully. Please log in.")
+        return redirect("login")
+
+    return render(request, "accounts/register.html")

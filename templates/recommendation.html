@@ -39,6 +39,9 @@
         {% endfor %}
     </div>
 </section>
-
+return render(request, "products/recommendations.html", {
+    "product": product,
+    "recommended_list": recommended_list
+})
 </body>
 </html>
