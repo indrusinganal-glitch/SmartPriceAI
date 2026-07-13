@@ -18,9 +18,9 @@ def register_view(request):
             messages.error(request, "Passwords do not match.")
             return render(request, "accounts/register.html")
 
-        if User.objects.filter(username__iexact=username).exists():
-            messages.error(request, "This username is already taken. Choose another username.")
-            return render(request, "accounts/register.html")
+        if User.objects.filter(username=username).exists():
+    messages.error(request, "Username already exists.")
+    return render(request, "accounts/register.html")
 
         if email and User.objects.filter(email__iexact=email).exists():
             messages.error(request, "An account with this email already exists.")
